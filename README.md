@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# বাজার দর (BazarDor)
 
-## Getting Started
+বাজার দর is a Bangla market price tracker. It shows today's price for everyday
+groceries, how much each one moved since yesterday, and what the same item costs
+in different bazars across the country. Prices, dates and percentages are all
+shown in Bengali numerals.
 
-First, run the development server:
+**Live site:** _add after deploy_
+
+## Technology used
+
+- Next.js 16 with the App Router
+- TypeScript
+- Tailwind CSS v4 + DaisyUI
+- BetterAuth with the MongoDB adapter
+- MongoDB Atlas
+- React Hot Toast
+- React Icons
+
+## Features
+
+1. **Today's price for every product.** All items load from the BazarDor API and
+   show the price, the unit, and a badge saying how much it rose or fell, green
+   for up and red for down.
+2. **Risers and fallers at a glance.** The home page pulls out the six products
+   that climbed the most today and the six that dropped the most, so you can see
+   the movement without scrolling the whole list.
+3. **A live price ticker.** A scrolling strip under the navbar runs through every
+   product with its current price and change, and pauses when you hover it.
+4. **Category pages with sorting.** Each category has its own page with a sort
+   control for default, cheapest first, or most expensive first. Sorting works on
+   the real numbers, not the Bengali text.
+5. **Market by market breakdown.** Open any product to see the lowest, highest
+   and average price, plus a table of what every bazar is charging today.
+6. **Accounts with three ways in.** Email and password, Google, or GitHub, all
+   through BetterAuth. Product detail pages are protected, and signing out or
+   signing in gives you a toast either way.
+7. **Editable profile.** The profile page has an update route where you can
+   change your name and have it saved back to your account.
+
+## Pages
+
+| Route | What it shows |
+| --- | --- |
+| `/` | Banner, risers, fallers and every product |
+| `/category/[slug]` | One category, with the sort control |
+| `/product/[slug]` | Full detail for one product, sign in required |
+| `/signin`, `/signup` | Email and social authentication |
+| `/profile`, `/profile/update` | Your account and the name update form |
+
+## The API
+
+- All products: `https://openapi.programming-hero.com/api/bazardor/products`
+- Categories: `https://openapi.programming-hero.com/api/bazardor/categories`
+
+## Run it locally
+
+Copy `.env.example` to `.env.local` and fill in the values:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+BETTER_AUTH_SECRET=   # any long random string
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URL=          # your MongoDB connection string
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open http://localhost:3000.
