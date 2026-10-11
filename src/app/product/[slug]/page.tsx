@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   changeClasses,
   changeLabel,
+  toBnDigits,
   toBnPrice,
   unitLabels,
   unitShort,
@@ -84,7 +85,7 @@ const ProductPage = async ({ params }: IProductPageProps) => {
         </div>
 
         <p className="mt-5 leading-7 text-muted">
-          {product.markets.length} টি বাজারের তথ্য অনুযায়ী {product.nameBn} আজ{" "}
+          {toBnDigits(product.markets.length)} টি বাজারের তথ্য অনুযায়ী {product.nameBn} আজ{" "}
           {toBnPrice(minPrice)} থেকে {toBnPrice(maxPrice)} টাকায় বিক্রি হচ্ছে।
           গতকাল দাম ছিল {toBnPrice(product.yesterday)} টাকা, এক সপ্তাহ আগে{" "}
           {toBnPrice(product.lastWeek)} টাকা।

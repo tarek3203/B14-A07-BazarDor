@@ -1,4 +1,5 @@
 import ProductCard from "@/components/shared/ProductCard";
+import { toBnDigits } from "@/lib/bn";
 import { getProducts, getTopMovers } from "@/lib/api";
 
 const ProductSections = async () => {
@@ -44,7 +45,7 @@ const ProductSections = async () => {
         <h2 className="text-2xl font-bold text-ink sm:text-3xl">সব পণ্য</h2>
 
         <p className="mt-1 text-muted">
-          মোট {products.length} টি পণ্যের আজকের বাজার দর, ক্যাটাগরি অনুযায়ী
+          মোট {toBnDigits(products.length)} টি পণ্যের আজকের বাজার দর, ক্যাটাগরি অনুযায়ী
           সাজানো।
         </p>
 
