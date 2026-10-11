@@ -5,7 +5,7 @@ groceries, how much each one moved since yesterday, and what the same item costs
 in different bazars across the country. Prices, dates and percentages are all
 shown in Bengali numerals.
 
-**Live site:** _add after deploy_
+**Live site:** https://b14-a07-bazardor.netlify.app
 
 ## Technology used
 
