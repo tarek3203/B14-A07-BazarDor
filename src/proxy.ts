@@ -1,16 +1,15 @@
-import { headers } from "next/headers";
+import { getSessionCookie } from "better-auth/cookies";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "./lib/auth";
 
-// next 16 renamed middleware.ts to proxy.ts. this guards the product detail
-// pages and the profile routes, sending signed out visitors to /signin
-export async function proxy(request: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+// next 16 renamed middleware.ts to proxy.ts, and this runs on the edge, so it
+// only checks that a session cookie is present. it cannot import the auth
+// instance because that pulls in the mongodb driver, which the edge runtime
+// cannot load. the real session check happens on the server once the page runs.
+export function proxy(request: NextRequest) {
+  const sessionCookie = getSessionCookie(request);
 
-  if (!session?.user) {
+  if (!sessionCookie) {
     const signInUrl = new URL("/signin", request.url);
     signInUrl.searchParams.set("redirect", request.nextUrl.pathname);
 
