@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@theme {
+  /* market palette: cream paper, green for the shop sign, red for a price rise */
+  --color-cream: #fdfbf5;
+  --color-paper: #ffffff;
+  --color-line: #e9e5dc;
+  --color-bazar: #15803d;
+  --color-bazar-dark: #14532d;
+  --color-rise: #15803d;
+  --color-fall: #dc2626;
+  --color-ink: #1c1917;
+  --color-muted: #78716c;
+
+  --font-bangla: var(--font-hind);
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-hind), system-ui, sans-serif;
+}
+
+/* the price ticker under the navbar */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  display: inline-flex;
+  min-width: 200%;
+  animation: ticker 40s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
